@@ -14,10 +14,10 @@ spec:
     enabled: true
     path: /internal/prometheus
   liveness:
-    path: /internal/isAlive
+    path: /internal/health/liveness
     initialDelay: 30
   readiness:
-    path: /internal/isReady
+    path: /internal/health/readiness
     initialDelay: 30
   replicas:
     min: 1
@@ -30,4 +30,9 @@ spec:
     requests:
       cpu: 500m
       memory: 512Mi
+  env:
+    - name: AAD_B2C_DISCOVERY_URL
+      value: https://login.microsoftonline.com/NAVtestB2C.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_idporten_ver1
+    - name: AAD_B2C_CLIENT_ID
+      value: 0090b6e1-ffcc-4c37-bc21-049f7d1f0fe5
 
