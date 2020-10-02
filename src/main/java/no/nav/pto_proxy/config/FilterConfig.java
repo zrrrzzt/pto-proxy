@@ -4,6 +4,7 @@ import no.nav.common.auth.context.UserRole;
 import no.nav.common.auth.oidc.filter.OidcAuthenticationFilter;
 import no.nav.common.auth.oidc.filter.OidcAuthenticatorConfig;
 import no.nav.common.log.LogFilter;
+import no.nav.pto_proxy.ProxyFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +43,17 @@ public class FilterConfig {
 
         registration.setFilter(authenticationFilter);
         registration.setOrder(2);
-        registration.addUrlPatterns("/api/*");
+        registration.addUrlPatterns("/proxy/*");
+        return registration;
+    }
+
+    @Bean
+    public FilterRegistrationBean proxyFilterRegistrationBean(ProxyUrlProperties proxyUrlProperties) {
+        FilterRegistrationBean<ProxyFilter> registration = new FilterRegistrationBean<>();
+
+        registration.setFilter(new ProxyFilter("/proxy", proxyUrlProperties));
+        registration.setOrder(3);
+        registration.addUrlPatterns("/proxy/*");
         return registration;
     }
 

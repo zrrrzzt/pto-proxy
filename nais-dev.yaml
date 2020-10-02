@@ -35,4 +35,15 @@ spec:
       value: https://login.microsoftonline.com/NAVtestB2C.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1A_idporten_ver1
     - name: AAD_B2C_CLIENT_ID
       value: 0090b6e1-ffcc-4c37-bc21-049f7d1f0fe5
-
+    - name: VEILARBAKTIVITET_URL
+      value: https://app-q1.adeo.no/veilarbaktivitet
+    - name: VEILARBOPPFOLGING_URL
+      value: https://app-q1.adeo.no/veilarboppfolging
+    - name: VEILARBDIALOG_URL
+      value: https://app-q1.adeo.no/veilarbdialog
+    - name: VEILARBLEST_URL
+      value: https://app-q1.adeo.no/veilarblest
+    - name: VEILARBPERSON_URL
+      value: https://app-q1.adeo.no/veilarbperson
+    - name: VEILARBVEDTAKINFO_URL
+      value: https://app-q1.adeo.no/veilarbvedtakinfo
