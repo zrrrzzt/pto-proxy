@@ -1,0 +1,22 @@
+{
+  "eier": "Group_pto",
+  "sone": "FraFss",
+  "tjenester": [
+    {
+      "navn": "veilarboppfolging-api",
+      "endepunkt": "https://app-q1.adeo.no/veilarboppfolging",
+      "miljo": "q1"
+    },
+    {
+      "navn": "veilarboppfolging-api",
+      "endepunkt": "https://app.adeo.no/veilarboppfolging",
+      "miljo": "p"
+    }
+  ],
+  "konsumenter": [
+    {
+      "navn": "pto-proxy",
+      "tjeneste": "veilarboppfolging-api"
+    }
+  ]
+}

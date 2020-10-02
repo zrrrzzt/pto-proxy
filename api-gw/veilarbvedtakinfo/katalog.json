@@ -1,0 +1,22 @@
+{
+  "eier": "Group_pto",
+  "sone": "FraFss",
+  "tjenester": [
+    {
+      "navn": "veilarbvedtakinfo-api",
+      "endepunkt": "https://app-q1.adeo.no/veilarbvedtakinfo",
+      "miljo": "q1"
+    },
+    {
+      "navn": "veilarbvedtakinfo-api",
+      "endepunkt": "https://app.adeo.no/veilarbvedtakinfo",
+      "miljo": "p"
+    }
+  ],
+  "konsumenter": [
+    {
+      "navn": "pto-proxy",
+      "tjeneste": "veilarbvedtakinfo-api"
+    }
+  ]
+}
