@@ -37,7 +37,7 @@ public class ApiGwProxyFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
@@ -53,7 +53,7 @@ public class ApiGwProxyFilter implements Filter {
         String apiGwKey = proxyConfig.get(appName);
 
         if (apiGwKey == null) {
-            response.setStatus(404);
+            response.sendError(404);
             return;
         }
 
@@ -62,9 +62,10 @@ public class ApiGwProxyFilter implements Filter {
 
         try (Response proxyResponse = proxyClient.newCall(proxyRequest).execute()) {
             copyFromProxyResponse(proxyResponse, response);
+            response.flushBuffer();
         } catch (Exception e) {
             log.error("Proxy request feilet. Path: {}", pathWithQueryString, e);
-            response.setStatus(500);
+            response.sendError(500);
         }
     }
 
@@ -92,7 +93,7 @@ public class ApiGwProxyFilter implements Filter {
         return requestBuilder.build();
     }
 
-    private static void copyFromProxyResponse(Response proxyResponse, HttpServletResponse response) {
+    private static void copyFromProxyResponse(Response proxyResponse, HttpServletResponse response) throws IOException {
         response.setStatus(proxyResponse.code());
 
         Map<String, List<String>> headers = proxyResponse.headers().toMultimap();
@@ -115,7 +116,7 @@ public class ApiGwProxyFilter implements Filter {
                 }
             } catch (IOException e) {
                 log.error("Failed to copy proxy response body", e);
-                response.setStatus(500);
+                throw e;
             }
         }
     }
