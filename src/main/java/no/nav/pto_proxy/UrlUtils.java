@@ -36,4 +36,19 @@ public class UrlUtils {
         return requestPath;
     }
 
+    /**
+     * Returns the first segment of a url path.
+     * /some-path/test -> some-path
+     * some-path/test -> some-path
+     * @param urlPath the path to get the segment from
+     * @return the first segment of the path
+     */
+    public static String getFirstSegment(String urlPath) {
+        if (urlPath.startsWith("/")) {
+            return urlPath.substring(1, urlPath.indexOf("/", 1));
+        }
+
+        return urlPath.substring(0, urlPath.indexOf("/"));
+    }
+
 }

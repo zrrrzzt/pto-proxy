@@ -1,22 +1,31 @@
 {
-  "eier": "Group_pto",
+  "eier": "Group_41126212-6cb5-4c67-9ce1-22f7a686b298",
   "sone": "FraFss",
   "tjenester": [
     {
-      "navn": "veilarbvedtakinfo-api",
-      "endepunkt": "https://app-q1.adeo.no/veilarbvedtakinfo",
+      "navn": "veilarbvedtakinfoAPI",
+      "endepunkt": "https://veilarbvedtakinfo-q1.nais.preprod.local/veilarbvedtakinfo/api/",
       "miljo": "q1"
     },
     {
-      "navn": "veilarbvedtakinfo-api",
-      "endepunkt": "https://app.adeo.no/veilarbvedtakinfo",
+      "navn": "veilarbvedtakinfoAPI",
+      "endepunkt": "https://veilarbvedtakinfo-q0.nais.preprod.local/veilarbvedtakinfo/api/",
+      "miljo": "q0"
+    },
+    {
+      "navn": "veilarbvedtakinfoAPI",
+      "endepunkt": "https://veilarbvedtakinfo.nais.adeo.no/veilarbvedtakinfo/api/",
       "miljo": "p"
     }
   ],
   "konsumenter": [
     {
+      "navn": "veilarbproxy",
+      "tjeneste": "veilarbvedtakinfoAPI"
+    },
+    {
       "navn": "pto-proxy",
-      "tjeneste": "veilarbvedtakinfo-api"
+      "tjeneste": "veilarbvedtakinfoAPI"
     }
   ]
 }
