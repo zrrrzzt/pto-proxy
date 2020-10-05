@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static no.nav.common.auth.Constants.AZURE_AD_B2C_ID_TOKEN_COOKIE_NAME;
 import static no.nav.common.auth.oidc.filter.OidcAuthenticator.fromConfigs;
@@ -21,15 +20,6 @@ import static no.nav.common.utils.EnvironmentUtils.requireApplicationName;
 
 @Configuration
 public class FilterConfig {
-
-    private final static List<String> PROXIED_APPLICTIONS = List.of(
-//            "veilarbaktivitet",
-//            "veilarboppfolging",
-//            "veilarbdialog",
-//            "veilarblest",
-//            "veilarbperson",
-            "veilarbvedtakinfo"
-    );
 
     private OidcAuthenticatorConfig azureAdB2CAuthConfig(EnvironmentProperties properties) {
         return new OidcAuthenticatorConfig()
@@ -61,26 +51,14 @@ public class FilterConfig {
         return registration;
     }
 
-    @Bean
-    public FilterRegistrationBean proxyFilterRegistrationBean(EnvironmentProperties properties) {
-        FilterRegistrationBean<ApiGwProxyFilter> registration = new FilterRegistrationBean<>();
-
-        registration.setFilter(new ApiGwProxyFilter("/proxy", properties.getApiGwUrl(), createProxyConfig(PROXIED_APPLICTIONS)));
-        registration.setOrder(3);
-        registration.addUrlPatterns("/proxy/*");
-        return registration;
-    }
-
-    private static Map<String, String> createProxyConfig(List<String> applications) {
-        Map<String, String> proxyConfig = new HashMap<>();
-
-        applications.forEach(app -> {
-            String apiGwKeyEnvName = "API_GW_KEY_" + app.toUpperCase();
-            String apiGwKey = EnvironmentUtils.getRequiredProperty(apiGwKeyEnvName);
-            proxyConfig.put(app, apiGwKey);
-        });
-
-        return proxyConfig;
-    }
+//    @Bean
+//    public FilterRegistrationBean proxyFilterRegistrationBean(EnvironmentProperties properties) {
+//        FilterRegistrationBean<ApiGwProxyFilter> registration = new FilterRegistrationBean<>();
+//
+//        registration.setFilter(new ApiGwProxyFilter("/proxy", properties.getApiGwUrl(), createProxyConfig(PROXIED_APPLICTIONS)));
+//        registration.setOrder(3);
+//        registration.addUrlPatterns("/proxy/*");
+//        return registration;
+//    }
 
 }
