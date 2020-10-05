@@ -41,9 +41,14 @@ public class ApiGwProxyFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String fullRequestUrl = UrlUtils.getFullUrl(request);
-        String urlWithoutPrefix = UrlUtils.stripStartPath(proxyPathPrefix, fullRequestUrl);
-        String appName = UrlUtils.getFirstSegment(urlWithoutPrefix);
+        // Ex: /proxy/veilarbvedtakinfo/api/ping?test=true
+        String pathWithQueryString = UrlUtils.getPathWithQueryString(request);
+
+        // Ex: /veilarbvedtakinfo/api/ping?test=true
+        String pathWithoutPrefix = UrlUtils.stripStartPath(proxyPathPrefix, pathWithQueryString);
+
+        // Ex: veilarbvedtakinfo
+        String appName = UrlUtils.getFirstSegment(pathWithoutPrefix);
 
         String apiGwKey = proxyConfig.get(appName);
 
@@ -52,13 +57,13 @@ public class ApiGwProxyFilter implements Filter {
             return;
         }
 
-        String proxyUrl = no.nav.common.utils.UrlUtils.joinPaths(apiGwUrl, urlWithoutPrefix);
+        String proxyUrl = no.nav.common.utils.UrlUtils.joinPaths(apiGwUrl, pathWithoutPrefix);
         Request proxyRequest = createProxyRequest(proxyUrl, apiGwKey, request);
 
         try (Response proxyResponse = proxyClient.newCall(proxyRequest).execute()) {
             copyFromProxyResponse(proxyResponse, response);
         } catch (Exception e) {
-            log.error("Proxy request feilet. FullRequestUrl: {}", fullRequestUrl, e);
+            log.error("Proxy request feilet. Path: {}", pathWithQueryString, e);
             response.setStatus(500);
         }
     }
