@@ -11,7 +11,7 @@ import java.util.List;
 @EnableConfigurationProperties({EnvironmentProperties.class})
 public class ApplicationConfig {
 
-    private final static List<String> PROXIED_APPLICATIONS = List.of(
+    public final static List<String> PROXIED_APPLICATIONS = List.of(
 //            "veilarbaktivitet",
 //            "veilarboppfolging",
 //            "veilarbdialog",

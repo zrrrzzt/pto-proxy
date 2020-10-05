@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +33,7 @@ public class ApiGwProxyController {
         proxyClient = RestClient.baseClient();
     }
 
-    @RequestMapping
+    @RequestMapping("**")
     public ResponseEntity proxy(HttpServletRequest request) {
 
         // Ex: /proxy/veilarbvedtakinfo/api/ping?test=true
