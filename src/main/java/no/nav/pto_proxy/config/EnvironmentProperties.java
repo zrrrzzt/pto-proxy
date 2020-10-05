@@ -13,4 +13,6 @@ public class EnvironmentProperties {
 
     private String aadB2cClientId;
 
+    private String apiGwUrl;
+
 }

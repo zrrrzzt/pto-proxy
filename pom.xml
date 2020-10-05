@@ -93,6 +93,11 @@
             <artifactId>rest</artifactId>
             <version>${common.version}</version>
         </dependency>
+        <dependency>
+            <groupId>no.nav.common</groupId>
+            <artifactId>util</artifactId>
+            <version>${common.version}</version>
+        </dependency>
 
         <!-- test -->
         <dependency>

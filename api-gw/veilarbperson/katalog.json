@@ -1,0 +1,22 @@
+{
+  "eier": "Group_41126212-6cb5-4c67-9ce1-22f7a686b298",
+  "sone": "FraFss",
+  "tjenester": [
+    {
+      "navn": "veilarbperson-api",
+      "endepunkt": "https://app-q1.adeo.no/veilarbperson",
+      "miljo": "q1"
+    },
+    {
+      "navn": "veilarbperson-api",
+      "endepunkt": "https://app.adeo.no/veilarbperson",
+      "miljo": "p"
+    }
+  ],
+  "konsumenter": [
+    {
+      "navn": "pto-proxy",
+      "tjeneste": "veilarbperson-api"
+    }
+  ]
+}

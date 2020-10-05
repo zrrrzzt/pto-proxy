@@ -3,7 +3,6 @@ package no.nav.pto_proxy;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.common.rest.client.RestClient;
-import no.nav.pto_proxy.config.ProxyUrlProperties;
 import okhttp3.*;
 
 import javax.servlet.*;
@@ -16,22 +15,25 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class ProxyFilter implements Filter {
+public class ApiGwProxyFilter implements Filter {
+
+    private final static String API_GW_KEY_HEADER = "x-nav-apiKey";
 
     private final String proxyPathPrefix;
 
+    private final String apiGwUrl;
+
     private final OkHttpClient proxyClient;
 
-    private final ProxyUrlMapper proxyUrlMapper;
+    // Map of proxied applications and the API-gw key for that application
+    private final Map<String, String> proxyConfig;
 
-    public ProxyFilter(String proxyPathPrefix, ProxyUrlProperties proxyUrlProperties) {
+    public ApiGwProxyFilter(String proxyPathPrefix, String apiGwUrl, Map<String, String> proxyConfig) {
         this.proxyPathPrefix = proxyPathPrefix;
+        this.apiGwUrl = apiGwUrl;
+        this.proxyConfig = proxyConfig;
 
-        proxyClient = RestClient.baseClientBuilder()
-                .proxy(null)
-                .build();
-
-        proxyUrlMapper = new ProxyUrlMapper(proxyUrlProperties);
+        proxyClient = RestClient.baseClient();
     }
 
     @Override
@@ -41,14 +43,17 @@ public class ProxyFilter implements Filter {
 
         String fullRequestUrl = UrlUtils.getFullUrl(request);
         String urlWithoutPrefix = UrlUtils.stripStartPath(proxyPathPrefix, fullRequestUrl);
+        String appName = UrlUtils.getFirstSegment(urlWithoutPrefix);
 
-        if (!proxyUrlMapper.hasProxyMapping(urlWithoutPrefix)) {
+        String apiGwKey = proxyConfig.get(appName);
+
+        if (apiGwKey == null) {
             response.setStatus(404);
             return;
         }
 
-        String proxyUrl = proxyUrlMapper.mapRequestPathToProxyUrl(urlWithoutPrefix);
-        Request proxyRequest = createProxyRequest(proxyUrl, request);
+        String proxyUrl = no.nav.common.utils.UrlUtils.joinPaths(apiGwUrl, urlWithoutPrefix);
+        Request proxyRequest = createProxyRequest(proxyUrl, apiGwKey, request);
 
         try (Response proxyResponse = proxyClient.newCall(proxyRequest).execute()) {
             copyFromProxyResponse(proxyResponse, response);
@@ -58,7 +63,7 @@ public class ProxyFilter implements Filter {
         }
     }
 
-    private static Request createProxyRequest(String proxyUrl, HttpServletRequest request) {
+    private static Request createProxyRequest(String proxyUrl, String apiGwKey, HttpServletRequest request) {
         Request.Builder requestBuilder = new Request.Builder()
                 .url(proxyUrl);
 
@@ -67,6 +72,8 @@ public class ProxyFilter implements Filter {
                 requestBuilder.addHeader(headerName, headerValue);
             });
         });
+
+        requestBuilder.header(API_GW_KEY_HEADER, apiGwKey);
 
         if (request.getContentLengthLong() > 0) {
             MediaType contentType = MediaType.get(request.getContentType());
