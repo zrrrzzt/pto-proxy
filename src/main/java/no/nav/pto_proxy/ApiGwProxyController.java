@@ -93,7 +93,7 @@ public class ApiGwProxyController {
         Map<String, List<String>> headers = proxyResponse.headers().toMultimap();
 
         headers.forEach((headerName, headerValues) -> {
-            responseBuilder.header(headerName, (String[]) headerValues.toArray());
+            responseBuilder.header(headerName, headerValues.toArray(new String[0]));
         });
 
         ResponseBody body = proxyResponse.body();
