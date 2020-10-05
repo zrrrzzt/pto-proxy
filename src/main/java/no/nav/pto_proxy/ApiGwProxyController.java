@@ -100,10 +100,12 @@ public class ApiGwProxyController {
 
         if (body != null) {
             try {
-                responseBuilder.body(body.bytes());
+                if (body.contentLength() > 0) {
+                    responseBuilder.body(body.bytes());
 
-                if (body.contentType() != null) {
-                    responseBuilder.contentType(org.springframework.http.MediaType.valueOf(body.contentType().toString()));
+                    if (body.contentType() != null) {
+                        responseBuilder.contentType(org.springframework.http.MediaType.valueOf(body.contentType().toString()));
+                    }
                 }
             } catch (IOException e) {
                 log.error("Failed to copy proxy response body", e);
