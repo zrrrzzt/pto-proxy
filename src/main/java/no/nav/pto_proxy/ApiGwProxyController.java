@@ -24,6 +24,23 @@ public class ApiGwProxyController {
 
     private final static String API_GW_KEY_HEADER = "x-nav-apiKey";
 
+
+    private final static List<String> BLACKLISTED_HEADERS = List.of(
+            // These are the "hop-by-hop" headers that should not be copied.
+            "connection",
+            "keep-alive",
+            "proxy-authenticate",
+            "proxy-authorization",
+            "te",
+            "trailers",
+            "transfer-encoding",
+            "upgrade",
+
+            // We set these ourselves
+            "content-length",
+            "content-type"
+    );
+
     private final OkHttpClient proxyClient;
 
     private final ProxyConfig proxyConfig;
@@ -68,9 +85,11 @@ public class ApiGwProxyController {
                 .url(proxyUrl);
 
         request.getHeaderNames().asIterator().forEachRemaining(headerName -> {
-            request.getHeaders(headerName).asIterator().forEachRemaining(headerValue -> {
-                requestBuilder.addHeader(headerName, headerValue);
-            });
+            if (!isHeaderBlacklisted(headerName)) {
+                request.getHeaders(headerName).asIterator().forEachRemaining(headerValue -> {
+                    requestBuilder.addHeader(headerName, headerValue);
+                });
+            }
         });
 
         requestBuilder.header(API_GW_KEY_HEADER, apiGwKey);
@@ -87,13 +106,19 @@ public class ApiGwProxyController {
         return requestBuilder.build();
     }
 
+    private static boolean isHeaderBlacklisted(String headerName) {
+        return BLACKLISTED_HEADERS.contains(headerName.toLowerCase());
+    }
+
     private static ResponseEntity createResponseEntity(Response proxyResponse) throws IOException {
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.status(proxyResponse.code());
 
         Map<String, List<String>> headers = proxyResponse.headers().toMultimap();
 
         headers.forEach((headerName, headerValues) -> {
-            responseBuilder.header(headerName, headerValues.toArray(new String[0]));
+            if (!isHeaderBlacklisted(headerName)) {
+                responseBuilder.header(headerName, headerValues.toArray(new String[0]));
+            }
         });
 
         ResponseBody body = proxyResponse.body();
