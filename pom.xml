@@ -95,7 +95,7 @@
         </dependency>
         <dependency>
             <groupId>no.nav.common</groupId>
-            <artifactId>utils</artifactId>
+            <artifactId>util</artifactId>
             <version>${common.version}</version>
         </dependency>
 

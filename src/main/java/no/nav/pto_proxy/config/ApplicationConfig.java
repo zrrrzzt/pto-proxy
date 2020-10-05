@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableConfigurationProperties({EnvironmentProperties.class, ProxyUrlProperties.class})
+@EnableConfigurationProperties({EnvironmentProperties.class})
 public class ApplicationConfig {
 
 }
