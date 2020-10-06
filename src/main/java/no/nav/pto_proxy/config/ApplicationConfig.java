@@ -12,12 +12,14 @@ import java.util.List;
 public class ApplicationConfig {
 
     public final static List<String> PROXIED_APPLICATIONS = List.of(
-//            "veilarbaktivitet",
-//            "veilarboppfolging",
-//            "veilarbdialog",
-//            "veilarblest",
-//            "veilarbperson",
-            "veilarbvedtakinfo"
+            "veilarbaktivitet",
+            "veilarboppfolging",
+            "veilarbdialog",
+            "veilarblest",
+            "veilarbperson",
+            "veilarbvedtakinfo",
+            "veilarbregistrering",
+            "veilarbjobbsokerkompetanse"
     );
 
     @Bean
