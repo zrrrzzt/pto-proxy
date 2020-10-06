@@ -14,8 +14,10 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -24,7 +26,7 @@ public class ApiGwProxyController {
 
     public final static String API_GW_KEY_HEADER = "x-nav-apiKey";
 
-    private final static List<String> BLACKLISTED_HEADERS = List.of(
+    private final static Set<String> BLACKLISTED_HEADERS = new HashSet<>(List.of(
             // These are the "hop-by-hop" headers that should not be copied.
             "connection",
             "keep-alive",
@@ -37,8 +39,11 @@ public class ApiGwProxyController {
 
             // We set these ourselves
             "content-length",
-            "content-type"
-    );
+            "content-type",
+
+            // Not needed
+            "vary"
+    ));
 
     private final OkHttpClient proxyClient;
 
