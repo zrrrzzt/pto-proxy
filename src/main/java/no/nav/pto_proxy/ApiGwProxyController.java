@@ -22,8 +22,7 @@ import java.util.Map;
 @RequestMapping("/proxy")
 public class ApiGwProxyController {
 
-    private final static String API_GW_KEY_HEADER = "x-nav-apiKey";
-
+    public final static String API_GW_KEY_HEADER = "x-nav-apiKey";
 
     private final static List<String> BLACKLISTED_HEADERS = List.of(
             // These are the "hop-by-hop" headers that should not be copied.
@@ -95,10 +94,14 @@ public class ApiGwProxyController {
         requestBuilder.header(API_GW_KEY_HEADER, apiGwKey);
 
         if (request.getContentLengthLong() > 0) {
-            MediaType contentType = MediaType.get(request.getContentType());
             byte[] requestContent = getRequestContent(request);
 
-            requestBuilder.method(request.getMethod(), RequestBody.create(contentType, requestContent));
+            String contentType = request.getContentType();
+            MediaType mediaType = contentType != null
+                    ? MediaType.get(contentType)
+                    : null;
+
+            requestBuilder.method(request.getMethod(), RequestBody.create(mediaType, requestContent));
         } else {
             requestBuilder.method(request.getMethod(), null);
         }
@@ -127,6 +130,9 @@ public class ApiGwProxyController {
         if (bytes.length > 0) {
             if (body.contentType() != null) {
                 responseBuilder.contentType(org.springframework.http.MediaType.valueOf(body.contentType().toString()));
+            } else {
+                // Default to text/plain if the proxy response does not contain a Content-Type
+                responseBuilder.contentType(org.springframework.http.MediaType.TEXT_PLAIN);
             }
 
             return responseBuilder.body(bytes);

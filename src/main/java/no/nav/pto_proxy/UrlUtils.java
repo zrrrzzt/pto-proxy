@@ -39,10 +39,15 @@ public class UrlUtils {
      */
     public static String getFirstSegment(String urlPath) {
         if (urlPath.startsWith("/")) {
-            return urlPath.substring(1, urlPath.indexOf("/", 1));
+            return urlPath.substring(1, indexOfOrEnd(urlPath, "/", 1));
         }
 
-        return urlPath.substring(0, urlPath.indexOf("/"));
+        return urlPath.substring(0, indexOfOrEnd(urlPath, "/", 0));
+    }
+
+    private static int indexOfOrEnd(String str, String searchStr, int fromIndex) {
+        int indexOf = str.indexOf(searchStr, fromIndex);
+        return indexOf >= 0 ? indexOf : str.length();
     }
 
 }
