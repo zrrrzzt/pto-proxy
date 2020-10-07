@@ -1,9 +1,11 @@
-package no.nav.pto_proxy;
+package no.nav.pto_proxy.controller;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import no.nav.common.rest.client.RestClient;
 import no.nav.pto_proxy.config.ProxyConfig;
+import no.nav.pto_proxy.utils.ProxyHeaderBlacklist;
+import no.nav.pto_proxy.utils.UrlUtils;
 import okhttp3.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Slf4j
 @Controller
@@ -25,25 +25,6 @@ import java.util.Set;
 public class ApiGwProxyController {
 
     public final static String API_GW_KEY_HEADER = "x-nav-apiKey";
-
-    private final static Set<String> BLACKLISTED_HEADERS = new HashSet<>(List.of(
-            // These are the "hop-by-hop" headers that should not be copied.
-            "connection",
-            "keep-alive",
-            "proxy-authenticate",
-            "proxy-authorization",
-            "te",
-            "trailers",
-            "transfer-encoding",
-            "upgrade",
-
-            // We set these ourselves
-            "content-length",
-            "content-type",
-
-            // Not needed
-            "vary"
-    ));
 
     private final OkHttpClient proxyClient;
 
@@ -89,7 +70,7 @@ public class ApiGwProxyController {
                 .url(proxyUrl);
 
         request.getHeaderNames().asIterator().forEachRemaining(headerName -> {
-            if (!isHeaderBlacklisted(headerName)) {
+            if (ProxyHeaderBlacklist.isNotListed(headerName)) {
                 request.getHeaders(headerName).asIterator().forEachRemaining(headerValue -> {
                     requestBuilder.addHeader(headerName, headerValue);
                 });
@@ -114,17 +95,13 @@ public class ApiGwProxyController {
         return requestBuilder.build();
     }
 
-    private static boolean isHeaderBlacklisted(String headerName) {
-        return BLACKLISTED_HEADERS.contains(headerName.toLowerCase());
-    }
-
     private static ResponseEntity createResponseEntity(Response proxyResponse) throws IOException {
         ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.status(proxyResponse.code());
 
         Map<String, List<String>> headers = proxyResponse.headers().toMultimap();
 
         headers.forEach((headerName, headerValues) -> {
-            if (!isHeaderBlacklisted(headerName)) {
+            if (ProxyHeaderBlacklist.isNotListed(headerName)) {
                 responseBuilder.header(headerName, headerValues.toArray(new String[0]));
             }
         });

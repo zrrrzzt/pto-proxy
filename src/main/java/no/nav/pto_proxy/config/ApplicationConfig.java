@@ -1,6 +1,6 @@
 package no.nav.pto_proxy.config;
 
-import no.nav.pto_proxy.ProxyUtils;
+import no.nav.pto_proxy.utils.ProxyUtils;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,7 @@ import java.util.List;
 @EnableConfigurationProperties({EnvironmentProperties.class})
 public class ApplicationConfig {
 
-    public final static List<String> PROXIED_APPLICATIONS = List.of(
+    private final static List<String> PROXIED_APPLICATIONS = List.of(
             "veilarbaktivitet",
             "veilarboppfolging",
             "veilarbdialog",

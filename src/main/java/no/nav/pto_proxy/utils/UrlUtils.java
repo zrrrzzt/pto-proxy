@@ -1,4 +1,4 @@
-package no.nav.pto_proxy;
+package no.nav.pto_proxy.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

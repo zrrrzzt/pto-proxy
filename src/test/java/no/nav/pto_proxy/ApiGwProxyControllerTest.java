@@ -7,6 +7,7 @@ import com.github.tomakehurst.wiremock.matching.EqualToJsonPattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import no.nav.pto_proxy.config.ProxyConfig;
+import no.nav.pto_proxy.controller.ApiGwProxyController;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static no.nav.pto_proxy.ApiGwProxyController.API_GW_KEY_HEADER;
+import static no.nav.pto_proxy.controller.ApiGwProxyController.API_GW_KEY_HEADER;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = ApiGwProxyController.class)
