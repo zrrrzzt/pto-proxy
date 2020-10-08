@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import static no.nav.pto_proxy.filter.PreRequestZuulFilter.API_GW_KEY_HEADER;
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
@@ -13,8 +13,10 @@ import static no.nav.pto_proxy.filter.PreRequestZuulFilter.API_GW_KEY_HEADER;
 public class ProxySinkController {
 
     @GetMapping("/test-app/test")
-    public String test(@RequestHeader(API_GW_KEY_HEADER) String apiGwKey) {
-        log.info("Received key: " + apiGwKey);
+    public String test(HttpServletRequest request) {
+        request.getHeaderNames().asIterator().forEachRemaining(header -> {
+            log.info("Received header " + header + " " + request.getHeader(header));
+        });
         return "test";
     }
 
