@@ -61,7 +61,7 @@ public class ApiGwProxyControllerTest {
         givenThat(WireMock.get(urlEqualTo("/test-app1/hello"))
                 .willReturn(aResponse().withStatus(200)));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/proxy/test-app1/hello"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/proxy2/test-app1/hello"))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
@@ -70,7 +70,7 @@ public class ApiGwProxyControllerTest {
         givenThat(WireMock.get(urlEqualTo("/test-app1/hello"))
                 .willReturn(aResponse().withStatus(200)));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/proxy/test-app1/hello"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/proxy2/test-app1/hello"));
 
         verify(getRequestedFor(urlMatching("/test-app1/hello"))
                 .withHeader(API_GW_KEY_HEADER, matching(KEY_MAP.get("test-app1"))));
@@ -83,7 +83,7 @@ public class ApiGwProxyControllerTest {
                 .willReturn(aResponse().withStatus(200)));
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/proxy/test-app1/hello")
+                MockMvcRequestBuilders.get("/proxy2/test-app1/hello")
                     .header("Custom-Header1", "test1")
                     .header("Custom-Header2", "test2")
         );
@@ -105,14 +105,14 @@ public class ApiGwProxyControllerTest {
                                 .withHeader("Custom-Header2", "test2")
                 ));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/proxy/test-app1/hello"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/proxy2/test-app1/hello"))
                 .andExpect(MockMvcResultMatchers.header().string("Custom-Header1", "test1"))
                 .andExpect(MockMvcResultMatchers.header().string("Custom-Header2", "test2"));
     }
 
     @Test
     public void should_return_404_for_missing_proxy() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/proxy/test-app3/hello"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/proxy2/test-app3/hello"))
                 .andExpect(MockMvcResultMatchers.status().is(404));
     }
 
@@ -123,7 +123,7 @@ public class ApiGwProxyControllerTest {
         givenThat(WireMock.post(urlEqualTo("/test-app1/send"))
                 .willReturn(aResponse().withStatus(200)));
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/proxy/test-app1/send").content(requestData));
+        mockMvc.perform(MockMvcRequestBuilders.post("/proxy2/test-app1/send").content(requestData));
 
         verify(postRequestedFor(urlMatching("/test-app1/send"))
                 .withoutHeader("Content-Type")
@@ -137,7 +137,7 @@ public class ApiGwProxyControllerTest {
         givenThat(WireMock.post(urlEqualTo("/test-app1/send"))
                 .willReturn(aResponse().withStatus(200)));
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/proxy/test-app1/send")
+        mockMvc.perform(MockMvcRequestBuilders.post("/proxy2/test-app1/send")
                 .content(requestData)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         );
@@ -158,7 +158,7 @@ public class ApiGwProxyControllerTest {
                                 .withBody(responseData)
                 ));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/proxy/test-app1/receive"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/proxy2/test-app1/receive"))
                 .andExpect(MockMvcResultMatchers.content().json(responseData))
                 .andExpect(MockMvcResultMatchers.header().string("Content-Type", MediaType.TEXT_PLAIN_VALUE));
     }
@@ -175,7 +175,7 @@ public class ApiGwProxyControllerTest {
                                 .withBody(responseData)
                 ));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/proxy/test-app1/receive"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/proxy2/test-app1/receive"))
                 .andExpect(MockMvcResultMatchers.content().json(responseData))
                 .andExpect(MockMvcResultMatchers.header().string("Content-Type", MediaType.APPLICATION_JSON_VALUE));
     }
