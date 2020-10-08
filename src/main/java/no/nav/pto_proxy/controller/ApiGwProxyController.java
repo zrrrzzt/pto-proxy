@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping("/proxy")
+@RequestMapping("/proxy2")
 public class ApiGwProxyController {
 
     public final static String API_GW_KEY_HEADER = "x-nav-apiKey";
@@ -42,7 +42,7 @@ public class ApiGwProxyController {
         String pathWithQueryString = UrlUtils.getPathWithQueryString(request);
 
         // Ex: /veilarbvedtakinfo/api/ping?test=true
-        String pathWithoutPrefix = UrlUtils.stripStartPath("/proxy", pathWithQueryString);
+        String pathWithoutPrefix = UrlUtils.stripStartPath("/proxy2", pathWithQueryString);
 
         // Ex: veilarbvedtakinfo
         String appName = UrlUtils.getFirstSegment(pathWithoutPrefix);
