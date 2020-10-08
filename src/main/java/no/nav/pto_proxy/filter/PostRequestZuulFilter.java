@@ -22,7 +22,7 @@ public class PostRequestZuulFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 2;
+        return 1;
     }
 
     @Override

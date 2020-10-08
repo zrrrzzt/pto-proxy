@@ -27,13 +27,8 @@ public class ApplicationConfig {
     );
 
     @Bean
-    public ProxyConfig proxyConfig(EnvironmentProperties properties) {
-        return new ProxyConfig(properties.getApiGwUrl(), ProxyUtils.createProxyKeyMap(PROXIED_APPLICATIONS));
-    }
-
-    @Bean
     public PreRequestZuulFilter preRequestZuulFilter() {
-        return new PreRequestZuulFilter("/proxy", ProxyUtils.createProxyKeyMap(PROXIED_APPLICATIONS));
+        return new PreRequestZuulFilter("/proxy", ProxyUtils.createApiGwKeyMap(PROXIED_APPLICATIONS));
     }
 
     @Bean

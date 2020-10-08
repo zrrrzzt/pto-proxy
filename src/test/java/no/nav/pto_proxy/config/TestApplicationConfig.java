@@ -20,14 +20,6 @@ import static no.nav.common.utils.EnvironmentUtils.isDevelopment;
 public class TestApplicationConfig {
 
     @Bean
-    public ProxyConfig proxyConfig() {
-        Map<String, String> keyMap = new HashMap<>();
-        keyMap.put("test-app", "test-key");
-
-        return new ProxyConfig("http://localhost:8080/sink", keyMap);
-    }
-
-    @Bean
     public FilterRegistrationBean logFilterRegistrationBean() {
         FilterRegistrationBean<LogFilter> registration = new FilterRegistrationBean<>();
         registration.setFilter(new LogFilter("pto-proxy", isDevelopment().orElse(false)));

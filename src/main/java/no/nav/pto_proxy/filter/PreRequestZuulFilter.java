@@ -22,6 +22,7 @@ public class PreRequestZuulFilter extends ZuulFilter {
 
     private final String proxyContextPath;
 
+    // Map where each key corresponds to an application and the value is the API-GW key for proxying requests to the app
     private final Map<String, String> apiGwKeyMap;
 
     public PreRequestZuulFilter(String proxyContextPath, Map<String, String> apiGwKeyMap) {
@@ -54,6 +55,7 @@ public class PreRequestZuulFilter extends ZuulFilter {
         String apiGwKey = apiGwKeyMap.get(appName);
 
         if (apiGwKey == null) {
+            log.error("Unable to find API-GW key for {}", request.getRequestURL());
             throw new ZuulException("Proxy Mapping Not Found", 404, "Unable to find API-GW proxy mapping");
         }
 

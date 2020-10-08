@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ProxyUtils {
 
-    public static Map<String, String> createProxyKeyMap(List<String> applications) {
+    public static Map<String, String> createApiGwKeyMap(List<String> applications) {
         Map<String, String> proxyConfig = new HashMap<>();
 
         applications.forEach(app -> {

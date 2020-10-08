@@ -1,19 +1,6 @@
 package no.nav.pto_proxy.utils;
 
-import javax.servlet.http.HttpServletRequest;
-
 public class UrlUtils {
-
-    public static String getPathWithQueryString(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        String queryString = request.getQueryString();
-
-        if (queryString == null) {
-            return path;
-        } else {
-            return path + "?" + queryString;
-        }
-    }
 
     /**
      * Removes the start path from a request.
