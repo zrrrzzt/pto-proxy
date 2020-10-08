@@ -5,8 +5,6 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +33,9 @@ public class PostRequestZuulFilter extends ZuulFilter {
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-        HttpServletResponse response = ctx.getResponse();
 
         // The LogFilter sets Nav-Call-Id before the response is sent back
         filterOutDuplicateNavCallId(ctx);
-
-        log.info("Proxy response: {} {} {}", response.getStatus(), request.getMethod(), request.getRequestURL());
 
         return null;
     }

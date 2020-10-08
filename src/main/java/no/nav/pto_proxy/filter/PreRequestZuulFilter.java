@@ -63,7 +63,7 @@ public class PreRequestZuulFilter extends ZuulFilter {
                 .ifPresent(callId -> stream(NAV_CALL_ID_HEADER_NAMES)
                         .forEach(headerName -> ctx.addZuulRequestHeader(headerName, callId)));
 
-        log.info("Proxying request " + request.getRequestURL());
+        log.info("Proxying request method={} url={}", request.getMethod(), request.getRequestURL());
 
         return null;
     }
