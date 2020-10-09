@@ -11,8 +11,7 @@ import org.slf4j.MDC;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-import static java.util.Arrays.stream;
-import static no.nav.common.log.LogFilter.NAV_CALL_ID_HEADER_NAMES;
+import static no.nav.common.log.LogFilter.PREFERRED_NAV_CALL_ID_HEADER_NAME;
 import static no.nav.common.utils.StringUtils.of;
 
 @Slf4j
@@ -62,8 +61,7 @@ public class PreRequestZuulFilter extends ZuulFilter {
         ctx.addZuulRequestHeader(API_GW_KEY_HEADER, apiGwKey);
 
         of(MDC.get(MDCConstants.MDC_CALL_ID))
-                .ifPresent(callId -> stream(NAV_CALL_ID_HEADER_NAMES)
-                        .forEach(headerName -> ctx.addZuulRequestHeader(headerName, callId)));
+                .ifPresent(callId -> ctx.addZuulRequestHeader(PREFERRED_NAV_CALL_ID_HEADER_NAME, callId));
 
         log.info("Proxying request method={} url={}", request.getMethod(), request.getRequestURL());
 
