@@ -1,0 +1,22 @@
+{
+  "eier": "Group_41126212-6cb5-4c67-9ce1-22f7a686b298",
+  "sone": "FraFss",
+  "tjenester": [
+    {
+      "navn": "pto-unleash-api",
+      "endepunkt": "https://pto-unleash.dev.adeo.no",
+      "miljo": "q1"
+    },
+    {
+      "navn": "pto-unleash-api",
+      "endepunkt": "https://pto-unleash.nais.adeo.no",
+      "miljo": "p"
+    }
+  ],
+  "konsumenter": [
+    {
+      "navn": "pto-proxy",
+      "tjeneste": "pto-unleash-api"
+    }
+  ]
+}
