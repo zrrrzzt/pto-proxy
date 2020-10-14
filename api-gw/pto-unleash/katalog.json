@@ -4,12 +4,12 @@
   "tjenester": [
     {
       "navn": "pto-unleash-api",
-      "endepunkt": "https://pto-unleash.dev.adeo.no",
+      "endepunkt": "https://pto-unleash.dev.adeo.no/api",
       "miljo": "q1"
     },
     {
       "navn": "pto-unleash-api",
-      "endepunkt": "https://pto-unleash.nais.adeo.no",
+      "endepunkt": "https://pto-unleash.nais.adeo.no/api",
       "miljo": "p"
     }
   ],

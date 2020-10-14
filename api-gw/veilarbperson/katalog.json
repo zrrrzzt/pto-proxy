@@ -3,20 +3,29 @@
   "sone": "FraFss",
   "tjenester": [
     {
-      "navn": "veilarbperson-api",
-      "endepunkt": "https://app-q1.adeo.no/veilarbperson",
+      "navn": "veilarbpersonAPI",
+      "endepunkt": "https://app-q1.adeo.no/veilarbperson/api",
       "miljo": "q1"
     },
     {
-      "navn": "veilarbperson-api",
-      "endepunkt": "https://app.adeo.no/veilarbperson",
+      "navn": "veilarbpersonAPI",
+      "endepunkt": "https://app-q0.adeo.no/veilarbperson/api",
+      "miljo": "q0"
+    },
+    {
+      "navn": "veilarbpersonAPI",
+      "endepunkt": "https://veilarbperson.nais.adeo.no/veilarbperson/api",
       "miljo": "p"
     }
   ],
   "konsumenter": [
     {
       "navn": "pto-proxy",
-      "tjeneste": "veilarbperson-api"
+      "tjeneste": "veilarbpersonAPI"
+    },
+    {
+      "navn": "veilarbproxy",
+      "tjeneste": "veilarbpersonAPI"
     }
   ]
 }
