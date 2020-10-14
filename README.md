@@ -31,9 +31,12 @@ kubectl create secret generic pto-proxy-api-gw-keys \
 ### Hvordan registrere i api-gw
 https://stackoverflow.com/c/nav-it/questions/324
 
-curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/katalog/applikasjoner/<APP> -d @api-gw/<APP>/katalog.json 
+Bruk `/rest/v2/katalog/applikasjoner` for å oppdatere i api-management, dette vil ikke påvirke api-gw før man bruker `/rest/v2/register/deploy/` for å pushe ut endringene.
+Endringene må separat pushes ut til hvert miljø som f.eks q0,q1 og prod.
 
-curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/register/deploy/<APP> -d @api-gw/<APP>/register_(dev/prod).json 
+`curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/katalog/applikasjoner/<APP> -d @api-gw/<APP>/katalog.json`
+
+`curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/register/deploy/<APP> -d @api-gw/<APP>/register_(dev/prod).json` 
 
 Sørg for å sjekke hva som ligger i configen med endepunktet under før man gjør endringer på api-gw configen.
 https://api-management.nais.adeo.no/rest/v2/katalog/innhold/<APP>
