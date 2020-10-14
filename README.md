@@ -31,11 +31,9 @@ kubectl create secret generic pto-proxy-api-gw-keys \
 ### Hvordan registrere i api-gw
 https://stackoverflow.com/c/nav-it/questions/324
 
-curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/katalog/applikasjoner/<APP> -d @api-gw/<APP>/katalog_<APP>.json 
+curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/katalog/applikasjoner/<APP> -d @api-gw/<APP>/katalog.json 
 
-curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/register/deploy/<APP> -d @api-gw/<APP>/register_(dev/prod)-<APP>.json 
-
-TODO: Configen som ligger i api-gw/ er ikke riktig enda siden den ikke tar med configen som blir brukt av veilarbproxy
+curl -u NAV_IDENT:PASSWORD -v -H "kilde: noFasit" -H "Content-Type: application/json" -XPUT https://api-management.nais.adeo.no/rest/v2/register/deploy/<APP> -d @api-gw/<APP>/register_(dev/prod).json 
 
 Sørg for å sjekke hva som ligger i configen med endepunktet under før man gjør endringer på api-gw configen.
 https://api-management.nais.adeo.no/rest/v2/katalog/innhold/<APP>
