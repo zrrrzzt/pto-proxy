@@ -9,8 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "app.env")
 public class EnvironmentProperties {
 
-    private String aadB2cDiscoveryUrl;
+    private String loginserviceIdportenAudience;
 
-    private String aadB2cClientId;
-
+    private String loginserviceIdportenDiscoveryUrl;
 }
