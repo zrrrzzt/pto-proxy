@@ -17,13 +17,12 @@ public class ApplicationConfig {
 
     private final static List<String> PROXIED_APPLICATIONS = List.of(
             "veilarbaktivitet",
-            "veilarboppfolging",
             "veilarbdialog",
             "veilarblest",
+            "veilarboppfolging",
             "veilarbperson",
-            "veilarbvedtakinfo",
             "veilarbregistrering",
-            "veilarbjobbsokerkompetanse"
+            "veilarbvedtakinfo"
     );
 
     @Bean
