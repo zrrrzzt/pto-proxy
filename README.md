@@ -19,13 +19,12 @@ API-GW nøkklene blir lagt i vault og må legges inn som en k8s secret manuelt.
 ```shell script
 kubectl create secret generic pto-proxy-api-gw-keys \
 --from-literal=API_GW_KEY_VEILARBAKTIVITET=XXX \
---from-literal=API_GW_KEY_VEILARBOPPFOLGING=XXX \
 --from-literal=API_GW_KEY_VEILARBDIALOG=XXX \
 --from-literal=API_GW_KEY_VEILARBLEST=XXX \
+--from-literal=API_GW_KEY_VEILARBOPPFOLGING=XXX \
 --from-literal=API_GW_KEY_VEILARBPERSON=XXX \
---from-literal=API_GW_KEY_VEILARBVEDTAKINFO=XXX \
 --from-literal=API_GW_KEY_VEILARBREGISTRERING=XXX \
---from-literal=API_GW_KEY_VEILARBJOBBSOKERKOMPETANSE=XXX \    
+--from-literal=API_GW_KEY_VEILARBVEDTAKINFO=XXX
 ```
 
 ### Hvordan registrere i api-gw
