@@ -1,0 +1,31 @@
+{
+  "eier": "Group_41126212-6cb5-4c67-9ce1-22f7a686b298",
+  "sone": "FraFss",
+  "tjenester": [
+    {
+      "navn": "veilarbjobbsokerkompetansers",
+      "endepunkt": "https://veilarbjobbsokerkompetanse-q1.nais.preprod.local/veilarbjobbsokerkompetanse/api",
+      "miljo": "q1"
+    },
+    {
+      "navn": "veilarbjobbsokerkompetansers",
+      "endepunkt": "https://veilarbjobbsokerkompetanse-q0.nais.preprod.local/veilarbjobbsokerkompetanse/api",
+      "miljo": "q0"
+    },
+    {
+      "navn": "veilarbjobbsokerkompetansers",
+      "endepunkt": "https://veilarbjobbsokerkompetanse.nais.adeo.no/veilarbjobbsokerkompetanse/api",
+      "miljo": "p"
+    }
+  ],
+  "konsumenter": [
+    {
+      "navn": "pto-proxy",
+      "tjeneste": "veilarbjobbsokerkompetansers"
+    },
+    {
+      "navn": "veilarbproxy",
+      "tjeneste": "veilarbjobbsokerkompetansers"
+    }
+  ]
+}

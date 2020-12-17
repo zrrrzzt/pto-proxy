@@ -18,6 +18,7 @@ public class ApplicationConfig {
     private final static List<String> PROXIED_APPLICATIONS = List.of(
             "veilarbaktivitet",
             "veilarbdialog",
+            "veilarbjobbsokerkompetanse",
             "veilarblest",
             "veilarboppfolging",
             "veilarbperson",
