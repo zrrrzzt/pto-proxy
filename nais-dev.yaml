@@ -33,8 +33,8 @@ spec:
         - host: api-gw-q1.oera.no
       inbound:
         rules:
-          - application: podlet-vta-situasjon
-            namespace: paw
+          - application: layout-dittnav
+            namespace: personbruker
   envFrom:
     - secret: pto-proxy-api-gw-keys
     - configmap: loginservice-idporten
