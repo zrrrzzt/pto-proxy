@@ -3,20 +3,29 @@
   "sone": "FraFss",
   "tjenester": [
     {
-      "navn": "veilarblest-api",
-      "endepunkt": "https://app-q1.adeo.no/veilarblest",
+      "navn": "veilarblestAPI",
+      "endepunkt": "https://app-q1.adeo.no/veilarblest/api",
       "miljo": "q1"
     },
     {
-      "navn": "veilarblest-api",
-      "endepunkt": "https://app.adeo.no/veilarblest",
+      "navn": "veilarblestAPI",
+      "endepunkt": "https://app-q0.adeo.no/veilarblest/api",
+      "miljo": "q0"
+    },
+    {
+      "navn": "veilarblestAPI",
+      "endepunkt": "https://veilarblest.nais.adeo.no/veilarblest/api",
       "miljo": "p"
     }
   ],
   "konsumenter": [
     {
       "navn": "pto-proxy",
-      "tjeneste": "veilarblest-api"
+      "tjeneste": "veilarblestAPI"
+    },
+    {
+      "navn": "veilarbproxy",
+      "tjeneste": "veilarblestAPI"
     }
   ]
 }

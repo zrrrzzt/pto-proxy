@@ -3,20 +3,29 @@
   "sone": "FraFss",
   "tjenester": [
     {
-      "navn": "veilarbdialog-api",
-      "endepunkt": "https://app-q1.adeo.no/veilarbdialog",
+      "navn": "veilarbdialogAPI",
+      "endepunkt": "https://app-q1.adeo.no/veilarbdialog/api",
       "miljo": "q1"
     },
     {
-      "navn": "veilarbdialog-api",
-      "endepunkt": "https://app.adeo.no/veilarbdialog",
+      "navn": "veilarbdialogAPI",
+      "endepunkt": "https://app-q0.adeo.no/veilarbdialog/api",
+      "miljo": "q0"
+    },
+    {
+      "navn": "veilarbdialogAPI",
+      "endepunkt": "https://veilarbdialog.nais.adeo.no/veilarbdialog/api",
       "miljo": "p"
     }
   ],
   "konsumenter": [
     {
       "navn": "pto-proxy",
-      "tjeneste": "veilarbdialog-api"
+      "tjeneste": "veilarbdialogAPI"
+    },
+    {
+      "navn": "veilarbproxy",
+      "tjeneste": "veilarbdialogAPI"
     }
   ]
 }

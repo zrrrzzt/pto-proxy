@@ -4,17 +4,17 @@
   "tjenester": [
     {
       "navn": "veilarbvedtakinfoAPI",
-      "endepunkt": "https://veilarbvedtakinfo-q1.nais.preprod.local/veilarbvedtakinfo/api/",
+      "endepunkt": "https://app-q1.adeo.no/veilarbvedtakinfo/api",
       "miljo": "q1"
     },
     {
       "navn": "veilarbvedtakinfoAPI",
-      "endepunkt": "https://veilarbvedtakinfo-q0.nais.preprod.local/veilarbvedtakinfo/api/",
+      "endepunkt": "https://app-q0.adeo.no/veilarbvedtakinfo/api",
       "miljo": "q0"
     },
     {
       "navn": "veilarbvedtakinfoAPI",
-      "endepunkt": "https://veilarbvedtakinfo.nais.adeo.no/veilarbvedtakinfo/api/",
+      "endepunkt": "https://veilarbvedtakinfo.nais.adeo.no/veilarbvedtakinfo/api",
       "miljo": "p"
     }
   ],

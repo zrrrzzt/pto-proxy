@@ -3,20 +3,29 @@
   "sone": "FraFss",
   "tjenester": [
     {
-      "navn": "veilarboppfolging-api",
-      "endepunkt": "https://app-q1.adeo.no/veilarboppfolging",
+      "navn": "veilArbOppfolgingAPI",
+      "endepunkt": "https://app-q1.adeo.no/veilarboppfolging/api",
       "miljo": "q1"
     },
     {
-      "navn": "veilarboppfolging-api",
-      "endepunkt": "https://app.adeo.no/veilarboppfolging",
+      "navn": "veilArbOppfolgingAPI",
+      "endepunkt": "https://app-q0.adeo.no/veilarboppfolging/api",
+      "miljo": "q0"
+    },
+    {
+      "navn": "veilArbOppfolgingAPI",
+      "endepunkt": "https://veilarboppfolging.nais.adeo.no/veilarboppfolging/api",
       "miljo": "p"
     }
   ],
   "konsumenter": [
     {
       "navn": "pto-proxy",
-      "tjeneste": "veilarboppfolging-api"
+      "tjeneste": "veilArbOppfolgingAPI"
+    },
+    {
+      "navn": "veilarbproxy",
+      "tjeneste": "veilArbOppfolgingAPI"
     }
   ]
 }
