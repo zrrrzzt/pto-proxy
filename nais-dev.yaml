@@ -8,8 +8,6 @@ metadata:
 spec:
   image: docker.pkg.github.com/navikt/pto-proxy/pto-proxy:{{version}}
   port: 8080
-  ingresses:
-    - https://pto-proxy.dev.nav.no
   prometheus:
     enabled: true
     path: /internal/prometheus
@@ -26,7 +24,7 @@ spec:
   resources:
     limits:
       cpu: "1"
-      memory: 1Gi
+      memory: 2Gi
     requests:
       cpu: 500m
       memory: 512Mi
