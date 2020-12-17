@@ -8,6 +8,8 @@ metadata:
 spec:
   image: docker.pkg.github.com/navikt/pto-proxy/pto-proxy:{{version}}
   port: 8080
+  ingresses:
+    - https://pto-proxy.dev.intern.nav.no
   prometheus:
     enabled: true
     path: /internal/prometheus
@@ -31,10 +33,6 @@ spec:
   accessPolicy:
       external:
         - host: api-gw-q1.oera.no
-      inbound:
-        rules:
-          - application: layout-dittnav
-            namespace: personbruker
   envFrom:
     - secret: pto-proxy-api-gw-keys
     - configmap: loginservice-idporten
