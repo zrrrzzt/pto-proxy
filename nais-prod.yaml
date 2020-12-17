@@ -31,6 +31,10 @@ spec:
   accessPolicy:
       external:
         - host: api-gw.oera.no
+      inbound:
+        rules:
+          - application: podlet-vta-situasjon
+            namespace: paw
   envFrom:
     - secret: pto-proxy-api-gw-keys
     - configmap: loginservice-idporten
