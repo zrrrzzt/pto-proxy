@@ -31,6 +31,9 @@ spec:
       cpu: 500m
       memory: 512Mi
   accessPolicy:
+      inbound:
+        rules:
+          - application: behovsvurdering
       external:
         - host: api-gw-q1.oera.no
   envFrom:
