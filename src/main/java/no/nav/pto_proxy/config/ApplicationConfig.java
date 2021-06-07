@@ -23,7 +23,8 @@ public class ApplicationConfig {
             "veilarboppfolging",
             "veilarbperson",
             "veilarbregistrering",
-            "veilarbvedtakinfo"
+            "veilarbvedtakinfo",
+            "frontendlogger"
     );
 
     @Bean
