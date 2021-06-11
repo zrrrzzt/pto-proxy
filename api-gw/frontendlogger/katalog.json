@@ -9,7 +9,7 @@
     },
     {
       "navn": "frontendlogger",
-      "endepunkt": "https://frontendlogger.nais.adeo.no/api",
+      "endepunkt": "https://frontendlogger.nais.adeo.no/frontendlogger/api",
       "miljo": "p"
     }
   ],
