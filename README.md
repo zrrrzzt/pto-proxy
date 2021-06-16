@@ -25,7 +25,8 @@ kubectl create secret generic pto-proxy-api-gw-keys \
 --from-literal=API_GW_KEY_VEILARBOPPFOLGING=XXX \
 --from-literal=API_GW_KEY_VEILARBPERSON=XXX \
 --from-literal=API_GW_KEY_VEILARBREGISTRERING=XXX \
---from-literal=API_GW_KEY_VEILARBVEDTAKINFO=XXX
+--from-literal=API_GW_KEY_VEILARBVEDTAKINFO=XXX \
+--from-literal=API_GW_KEY_FRONTENDLOGGER=XXX
 ```
 
 ### Hvordan registrere i api-gw
