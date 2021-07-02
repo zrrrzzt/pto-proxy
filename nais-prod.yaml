@@ -33,6 +33,10 @@ spec:
   accessPolicy:
       inbound:
         rules:
+          - application: veientilarbeid
+            namespace: paw
+          - application: arbeidssokerregistrering
+            namespace: paw
           - application: behovsvurdering
           - application: flex-gateway
             namespace: flex
