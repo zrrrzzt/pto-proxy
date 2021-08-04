@@ -37,6 +37,8 @@ spec:
             namespace: paw
           - application: arbeidssokerregistrering
             namespace: paw
+          - application: veilarbregistrering
+            namespace: paw
           - application: behovsvurdering
           - application: flex-gateway
             namespace: flex
