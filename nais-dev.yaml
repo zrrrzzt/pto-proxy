@@ -40,6 +40,7 @@ spec:
           - application: veilarbregistrering
             namespace: paw
           - application: behovsvurdering
+          - application: aktivitetsplan
           - application: flex-gateway
             namespace: flex
       external:
