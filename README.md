@@ -41,3 +41,5 @@ Endringene må separat pushes ut til hvert miljø som f.eks q0,q1 og prod.
 
 Sørg for å sjekke hva som ligger i configen med endepunktet under før man gjør endringer på api-gw configen.
 https://api-management.nais.adeo.no/rest/v2/katalog/innhold/<APP>
+ 
+ 
