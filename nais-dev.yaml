@@ -43,6 +43,7 @@ spec:
             namespace: paw
           - application: behovsvurdering
           - application: aktivitetsplan
+          - application: arbeidsrettet-dialog
           - application: flex-gateway
             namespace: flex
       external:
